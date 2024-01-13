@@ -17,6 +17,7 @@ import com.alacriti.paymentGateway.payment.gateway.api.merchant.model.Payment;
 import com.alacriti.paymentGateway.payment.gateway.api.merchant.model.PaymentResponse;
 import com.alacriti.paymentGateway.payment.gateway.api.merchant.service.MerchantService;
 import com.alacriti.paymentGateway.payment.gateway.api.merchant.service.PaymentService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 public class MerchantController {
@@ -26,6 +27,7 @@ public class MerchantController {
 	@Autowired
 	PaymentService paymentService;
 	
+	@CrossOrigin(origins = "*")
 	@PostMapping("/register_merchant")
 	public MerchantResponse setMerchantData(@RequestBody Merchant merchant) {
 		
@@ -33,7 +35,7 @@ public class MerchantController {
 		return response;
 	}
 	
-	
+	@CrossOrigin(origins = "*")
 	@PostMapping("/payment")
 	public PaymentResponse requestPayment(@RequestBody Payment payment) {
 		PaymentResponse response = paymentService.requestPaymentStatus(payment);
@@ -41,7 +43,7 @@ public class MerchantController {
 		
 		}
 	
-	
+	@CrossOrigin(origins = "*")
 	@GetMapping("/payment_status/{transactionID}")
 	public List<PaymentResponse> getStatus(@PathVariable String transactionID){
 		
